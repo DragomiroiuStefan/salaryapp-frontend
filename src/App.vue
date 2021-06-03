@@ -1,17 +1,16 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <SalariesPage />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SalariesPage from "./views/SalariesPage.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    SalariesPage,
+  },
+};
 </script>
 
 <style>
@@ -19,8 +18,9 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
+  width: 80%;
+  margin: auto;
   margin-top: 60px;
 }
 </style>
