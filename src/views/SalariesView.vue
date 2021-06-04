@@ -1,5 +1,4 @@
 <template>
-  <h1>Salary App</h1>
   <Button
     label="Add salary"
     id="new-button"
@@ -35,6 +34,7 @@
 import axios from "axios";
 
 export default {
+  emits: ["addSalary"],
   components: {
     // SalariesTable,
   },
@@ -49,9 +49,11 @@ export default {
     };
   },
   methods: {
-    addSalary() {},
+    addSalary() {
+      this.$emit("addSalary");
+    },
     formatCurrency(value) {
-      return value + " RON"
+      return value + " RON";
     },
   },
 };
