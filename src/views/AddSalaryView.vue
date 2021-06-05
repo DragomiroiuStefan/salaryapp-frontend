@@ -114,10 +114,6 @@ export default {
 </script>
 
 <style scoped>
-#add-salary-form {
-  width: min-content;
-  margin: auto;
-}
 label {
   margin-right: 20px;
 }

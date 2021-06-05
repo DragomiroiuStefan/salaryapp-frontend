@@ -1,5 +1,11 @@
 <template>
-  <h1 id="header">Salary App</h1>
+  <div class="p-d-flex p-jc-between">
+    <h1 id="header">Salary App</h1>
+    <div id="log-button">
+      <Button label="Login" v-if="!isLoggedIn" @click="login" />
+      <Button label="Logout" v-if="isLoggedIn" @click="logout" />
+    </div>
+  </div>
   <SalariesView v-if="route == 'salaries'" @addSalary="processAddSalary" />
   <LoginRegisterView v-if="route == 'loginRegister'" @login="processLogin" />
   <AddSalaryView
@@ -20,6 +26,8 @@ export default {
   data() {
     return {
       route: localStorage.getItem("roleId") === "2" ? "admin" : "salaries",
+      from: null,
+      isLoggedIn: localStorage.getItem("username") !== null,
     };
   },
   components: {
@@ -34,6 +42,7 @@ export default {
         this.route = "addSalary";
       } else {
         this.route = "loginRegister";
+        this.from = "addSalary";
       }
     },
     processSalaryAdded() {
@@ -44,8 +53,18 @@ export default {
       if (isAdmin) {
         this.route = "admin";
       } else {
-        this.route = "addSalary";
+        this.route = this.from;
       }
+      this.isLoggedIn = true;
+    },
+    login() {
+      this.route = "loginRegister";
+      this.from = "salaries";
+    },
+    logout() {
+      localStorage.clear();
+      this.isLoggedIn = false;
+      this.route = "salaries";
     },
   },
 };
@@ -62,7 +81,10 @@ export default {
   margin-top: 60px;
 }
 #header {
-  margin-top: 100px;
+  margin-top: 60px;
   margin-bottom: 100px;
+}
+#log-button {
+  margin-top: 60px;
 }
 </style>
