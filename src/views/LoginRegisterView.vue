@@ -44,7 +44,6 @@
         <label for="password">password: </label>
         <Password
           v-model="registerUser.password"
-          :feedback="false"
           @input="registerUser.errorMessage = null"
         />
       </div>

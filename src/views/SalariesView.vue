@@ -59,4 +59,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#new-button {
+  margin-bottom: 20px;
+}
+</style>

@@ -1,38 +1,52 @@
 <template>
-  <h1 id="title">Salary App</h1>
+  <h1 id="header">Salary App</h1>
   <SalariesView v-if="route == 'salaries'" @addSalary="processAddSalary" />
-  <LoginRegisterView v-if="route == 'loginRegister'" @login="processLogin"/>
-  <AddSalaryView v-if="route == 'addSalary'" />
+  <LoginRegisterView v-if="route == 'loginRegister'" @login="processLogin" />
+  <AddSalaryView
+    v-if="route == 'addSalary'"
+    @salaryAdded="processSalaryAdded"
+  />
+  <AdminView v-if="route == 'admin'" />
 </template>
 
 <script>
 import SalariesView from "./views/SalariesView.vue";
 import LoginRegisterView from "./views/LoginRegisterView.vue";
 import AddSalaryView from "./views/AddSalaryView.vue";
+import AdminView from "./views/AdminView.vue";
 
 export default {
   name: "App",
   data() {
     return {
-      route: "salaries",
+      route: localStorage.getItem("roleId") === "2" ? "admin" : "salaries",
     };
   },
   components: {
     SalariesView,
     LoginRegisterView,
     AddSalaryView,
+    AdminView,
   },
   methods: {
     processAddSalary() {
       if (localStorage.getItem("username")) {
-        this.route = "addSalary"
+        this.route = "addSalary";
       } else {
         this.route = "loginRegister";
       }
     },
+    processSalaryAdded() {
+      this.route = "salaries";
+    },
     processLogin() {
-      this.route = "addSalary";
-    }
+      let isAdmin = localStorage.getItem("roleId") === "2";
+      if (isAdmin) {
+        this.route = "admin";
+      } else {
+        this.route = "addSalary";
+      }
+    },
   },
 };
 </script>
@@ -47,9 +61,8 @@ export default {
   margin: auto;
   margin-top: 60px;
 }
-#title {
-  text-align: center;
-  margin-top: 60px;
-  margin-bottom: 60px;
+#header {
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 </style>
